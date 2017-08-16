@@ -117,13 +117,13 @@ void bff_font_t::begin(uint32_t start_addr)
 	// calc num_glyphs
 	num_glyphs = chrm_size / (4*8); // chrm (char map)'s each record is 32byte
 
-Serial.printf("Font nominal height: %d\r\n", nominal_height);
-Serial.printf("Font num_glyphs    : %d\r\n", num_glyphs);
+Serial.printf_P(PSTR("Font nominal height: %d\r\n"), nominal_height);
+Serial.printf_P(PSTR("Font num_glyphs    : %d\r\n"), num_glyphs);
 	available = true;
 
 	return;
 error:
-Serial.printf("Error opening glyph\r\n");
+Serial.printf_P(PSTR("Error opening glyph\r\n"));
 	file.close();
 
 }
