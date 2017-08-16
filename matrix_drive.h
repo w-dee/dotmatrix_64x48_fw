@@ -13,6 +13,7 @@ void led_disable_i2s_output();
 void led_pre_init();
 void led_init();
 void led_write_settings();
+void led_set_contrast(int val);
 extern uint32_t button_read;
 void led_start_pwm_clock();
 void led_stop_pwm_clock();

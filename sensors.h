@@ -11,6 +11,8 @@ struct bme280_result_t
 };
 
 extern bme280_result_t bme280_result;
+void sensors_set_contrast_always_max(bool b);
+void sensors_change_current_contrast(int dir);
 void sensors_init();
 void sensors_check();
 

@@ -350,6 +350,7 @@ public:
 	screen_led_test_t()
 	{
 		set_erase_bg(false);
+		sensors_set_contrast_always_max(true); // always maximum contrast
 	}
 
 protected:
@@ -1387,6 +1388,15 @@ protected:
 			screen_manager.push(new screen_wifi_setting_t());
 			return;
 
+		case BUTTON_UP:
+			// up button; increase contrast
+			sensors_change_current_contrast(+1);
+			return;
+
+		case BUTTON_DOWN:
+			// down button; decrease contrast
+			sensors_change_current_contrast(-1);
+			return;
 		}
 	}
 

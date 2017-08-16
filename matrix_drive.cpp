@@ -692,15 +692,33 @@ static void ICACHE_RAM_ATTR led_set_led1642_reg(uint32_t latch_pattern, uint32_t
 }
 
 /**
+ LED1642 configuration register raw word
+ */
+static uint16_t led1642_raw_configration_reg;
+
+/**
  LED1642 configuration register word (must be already bit-interleaved and byte-swapped by byte_reverse(bit_interleave()) )
  */
-static uint32_t led1642_configration_reg;
+static volatile uint32_t led1642_configration_reg;
 
 /**
  * whether led1642_configration_reg has changed or not
  */
-static bool led1642_configration_reg_changed;
+static volatile bool led1642_configration_reg_changed;
 
+/**
+ * set contrast of led1642
+ */
+void led_set_contrast(int val)
+{
+	// val must be (currently) 0 .. 63
+	if(val > 63) val = 63;
+	if(val < 0) val = 0;
+	led1642_raw_configration_reg &= ~63;
+	led1642_raw_configration_reg |= val;
+	led1642_configration_reg = byte_reverse(bit_interleave(led1642_raw_configration_reg));
+	led1642_configration_reg_changed = true;
+}
 
 /**
 	Initialize LED1642
@@ -709,9 +727,9 @@ static void led_init_led1642()
 {
 	// See also: led_post() also sets initial setting for LED1642 only for POST
 	led1642_configration_reg =
-		byte_reverse(bit_interleave(
+		byte_reverse(bit_interleave( led1642_raw_configration_reg = (
 			(1<<11) | (1<<12) | // Output turn-on/off time: on:180ns, off:150ns
-			(1<<15) | (1<<13) | 63)); // 4096 brightness steps, SDO delay
+			(1<<15) | (1<<13) | 63))); // 4096 brightness steps, SDO delay
 
 	// Here we should repeat setting configuration register several times
 	// at least number of LED1642.
