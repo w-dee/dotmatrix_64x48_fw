@@ -167,6 +167,8 @@
 
 	<script type="riot/tag">
 		<firmwareupgrade>
+			<div>Specify "combined_rom.bin" and press "Update".</div>
+			<div>Uploading firmware takes about one minutes; Please be patient.</div>
 			<form method='POST' action='/update' enctype='multipart/form-data'>
 				<input type='file' name='update'>
 				<input type='submit' value='Update'>
@@ -178,8 +180,6 @@
 		<about>
 			<div>Mazo clock 3 by W.Dee: wdee.elec.kit.sup@gmail.com </div>
 			<div>Page : <a href="https://w-dee.github.io/dotmatrix_64x48/">https://w-dee.github.io/dotmatrix_64x48/</a></div>
-			
-			<div>Source : <a href="https://github.com/w-dee/dotmatrix_64x48/">https://github.com/w-dee/dotmatrix_64x48/</a></div>
 			
 			<div>Built at
 				{ window.settings.values.version_info.date } 
