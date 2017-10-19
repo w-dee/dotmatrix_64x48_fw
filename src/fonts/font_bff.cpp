@@ -133,6 +133,15 @@ bff_font_t::~bff_font_t()
 	file.close();
 }
 
+void bff_font_t::disable()
+{
+	// force disable BFF font system.
+	// Mainly used for firmware OTA; During OTA, font data will be overwritten
+	// and being unstable.
+	available = false;
+}
+
+
 bff_font_t::glyph_info_t bff_font_t::get_glyph_info_by_index(uint32_t index) const
 {
 	glyph_info_t info;

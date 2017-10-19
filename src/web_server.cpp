@@ -75,6 +75,7 @@ static void web_server_ota_upload_handler()
 		led_set_interval_mode(LIM_PWM_OFF); // stop harmful LED PWM clock which will interfere with WiFi.
 		Serial.setDebugOutput(true);
 		WiFiUDP::stopAll();
+		font_bff.disable(); // BFF fonts should be disabled during OTA, since font data will be overwritten.
 		Serial.printf_P(PSTR("Update: %s\n"), upload.filename.c_str());
 		ota_status = ota_header;
 	} else if(upload.status == UPLOAD_FILE_WRITE){

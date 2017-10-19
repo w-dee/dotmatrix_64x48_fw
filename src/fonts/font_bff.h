@@ -125,6 +125,7 @@ public:
 	bff_font_t();
 	~bff_font_t();
 	void begin(uint32_t start_addr);
+	void disable();
 
 	glyph_info_t get_glyph_info_by_index(uint32_t index) const;
 	glyph_info_t get_glyph_info(uint32_t codepoint) const;
