@@ -180,13 +180,7 @@ uint8_t BME280::readRegister(uint8_t address, uint8_t data[], uint8_t numberOfDa
   if(0 != Wire.endTransmission()) return 0;
  
   Wire.requestFrom((uint8_t)BME280_ADDRESS, numberOfData);
-  uint32_t start = millis();
-  while (Wire.available() < numberOfData) {
-    if((int32_t)(millis() - start) >= 5)
-    	return 0; // timeout
-    optimistic_yield(1);
-  }
- 
+
   for (numberOfDataRead = 0; numberOfDataRead < numberOfData; numberOfDataRead++) {
     data[numberOfDataRead] = Wire.read();
   }
